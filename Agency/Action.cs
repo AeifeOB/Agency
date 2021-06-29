@@ -11,7 +11,8 @@ namespace Agency
         public List<Asset> Inputs { get; set; }
         public List<Asset> Outputs { get; set; }
 
-        public virtual void execute(List<Asset> assets) { 
+        public virtual void Execute(List<Asset> assets)
+        {
             foreach(Asset asset in this.Inputs)
             {
                 assets.Remove(asset);

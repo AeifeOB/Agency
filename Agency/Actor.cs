@@ -6,30 +6,30 @@ namespace Agency
 {
     class Actor
     {
-        public List<Action> availableActions { get; set; }
-        public List<Asset> availableAssets { get; set; }
-        public List<Action> goals { get; set; }
-        public Plan currentPlan { get; set; }
+        public List<Action> AvailableActions { get; set; }
+        public List<Asset> AvailableAssets { get; set; }
+        public List<Action> Goals { get; set; }
+        public Plan CurrentPlan { get; set; }
 
         public Actor()
         {
-            availableActions = new List<Action>();
-            availableAssets = new List<Asset>();
-            goals = new List<Action>();
-            currentPlan = new Plan();
+            AvailableActions = new List<Action>();
+            AvailableAssets = new List<Asset>();
+            Goals = new List<Action>();
+            CurrentPlan = new Plan();
         }
 
         public void Think()
         {
-            if(this.currentPlan.actions.Count == 0)
+            if(this.CurrentPlan.Actions.Count == 0)
             {
-                this.currentPlan.actions.Add(this.goals.First());
+                this.CurrentPlan.Actions.Add(this.Goals.First());
             }
-            int count = this.availableActions.Count * 2;
+            int count = this.AvailableActions.Count * 2;
             bool ableToCarryOutPlan = false;
             while (!ableToCarryOutPlan && count > 0){
                 count -= 1;
-                List<Asset> requiredAssets = this.findRequiredAssets(this.currentPlan.actions.Last());
+                List<Asset> requiredAssets = this.FindRequiredAssets(this.CurrentPlan.Actions.Last());
                 if (requiredAssets.Count == 0)
                 {
                     ableToCarryOutPlan = true;
@@ -39,25 +39,25 @@ namespace Agency
                     foreach (Asset asset in requiredAssets)
                     {
                         Console.WriteLine("Trying to find {0}", asset.GetType());
-                        foreach (Action action in this.availableActions)
+                        foreach (Action action in this.AvailableActions)
                         {
                             if (action.Outputs.Any(x => (x.GetType() == asset.GetType())))
                             {
-                                currentPlan.actions.Add(action);
+                                CurrentPlan.Actions.Add(action);
                             }
                         }
                     }
-                    this.currentPlan.actions = this.currentPlan.actions.Distinct().ToList();
+                    this.CurrentPlan.Actions = this.CurrentPlan.Actions.Distinct().ToList();
                 }
             }
         }
 
-        private List<Asset> findRequiredAssets(Action action)
+        private List<Asset> FindRequiredAssets(Action action)
         {
-            List<Asset> requiredAssets = new List<Asset>();
+            List<Asset> requiredAssets = new();
             foreach (Asset asset in action.Inputs)
             {
-                if (!this.availableAssets.Contains(asset)){
+                if (!this.AvailableAssets.Contains(asset)){
                     requiredAssets.Add(asset);
                 }
             }

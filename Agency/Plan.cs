@@ -8,19 +8,19 @@ namespace Agency
 {
     class Plan
     {
-        public List<Action> actions { get; set; }
+        public List<Action> Actions { get; set; }
 
         public Plan()
         {
-            this.actions = new List<Action>();
+            this.Actions = new List<Action>();
         }
 
         public void Execute(List<Asset> assets)
         {
-            this.actions.Reverse();
-            foreach (Action action in this.actions)
+            this.Actions.Reverse();
+            foreach (Action action in this.Actions)
             {
-                action.execute(assets);
+                action.Execute(assets);
             }
         }
     }

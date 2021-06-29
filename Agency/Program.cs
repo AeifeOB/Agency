@@ -7,19 +7,24 @@ namespace Agency
     {
         static void Main(string[] args)
         {
+            if (args is null)
+            {
+                throw new ArgumentNullException(nameof(args));
+            }
+
             Console.WriteLine("Agency v{0}", Assembly.GetExecutingAssembly().GetName().Version.ToString());
 
-            Actor agent = new Actor();
+            Actor agent = new();
 
-            Retire retire = new Retire();
+            Retire retire = new();
             retire.Inputs.Add(new Money(1000));
-            agent.goals.Add(retire);
+            agent.Goals.Add(retire);
 
             AddActionsToActor(agent);
 
             agent.Think();
 
-            foreach(Action action in agent.currentPlan.actions)
+            foreach(Action action in agent.CurrentPlan.Actions)
             {
                 Console.WriteLine(action);
             }
@@ -27,15 +32,15 @@ namespace Agency
 
         static void AddActionsToActor(Actor actor)
         {
-            RobBank robBank = new RobBank();
+            RobBank robBank = new();
             robBank.Inputs.Add(new Team(3));
             robBank.Outputs.Add(new Money(1000));
-            actor.availableActions.Add(robBank);
+            actor.AvailableActions.Add(robBank);
 
-            HireTeam hireTeam = new HireTeam();
+            HireTeam hireTeam = new();
             hireTeam.Inputs.Add(new Money(100));
             hireTeam.Outputs.Add(new Team(3));
-            actor.availableActions.Add(hireTeam);
+            actor.AvailableActions.Add(hireTeam);
         }
     }
 }

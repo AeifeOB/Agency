@@ -14,7 +14,7 @@ namespace Agency
             Outputs = new List<Asset>();
         }
 
-        public override void execute(List<Asset> assets)
+        public override void Execute(List<Asset> assets)
         {
             Console.WriteLine("You've retired...");
         }

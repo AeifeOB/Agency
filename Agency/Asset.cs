@@ -6,20 +6,20 @@
 
     class Money : Asset
     {
-        public float amount { get; set; }
+        public float Amount { get; set; }
 
         public Money(float amount)
         {
-            this.amount = amount;
+            this.Amount = amount;
         }
     }
 
     class Team : Asset
     {
-        public int members { get; set; }
+        public int Members { get; set; }
         public Team(int members)
         {
-            this.members = members;
+            this.Members = members;
         }
     }
 }
