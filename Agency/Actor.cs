@@ -21,13 +21,14 @@ namespace Agency
 
         public void Think()
         {
-            if(this.CurrentPlan.Actions.Count == 0)
+            if (this.CurrentPlan.Actions.Count == 0)
             {
                 this.CurrentPlan.Actions.Add(this.Goals.First());
             }
             int count = this.AvailableActions.Count * 2;
             bool ableToCarryOutPlan = false;
-            while (!ableToCarryOutPlan && count > 0){
+            while (!ableToCarryOutPlan && count > 0)
+            {
                 count -= 1;
                 List<Asset> requiredAssets = this.FindRequiredAssets(this.CurrentPlan.Actions.Last());
                 if (requiredAssets.Count == 0)
@@ -57,7 +58,8 @@ namespace Agency
             List<Asset> requiredAssets = new();
             foreach (Asset asset in action.Inputs)
             {
-                if (!this.AvailableAssets.Contains(asset)){
+                if (!this.AvailableAssets.Contains(asset))
+                {
                     requiredAssets.Add(asset);
                 }
             }

@@ -24,7 +24,7 @@ namespace Agency
 
             agent.Think();
 
-            foreach(Action action in agent.CurrentPlan.Actions)
+            foreach (Action action in agent.CurrentPlan.Actions)
             {
                 Console.WriteLine(action);
             }

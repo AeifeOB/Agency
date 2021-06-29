@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Agency
 {
@@ -13,11 +9,11 @@ namespace Agency
 
         public virtual void Execute(List<Asset> assets)
         {
-            foreach(Asset asset in this.Inputs)
+            foreach (Asset asset in this.Inputs)
             {
                 assets.Remove(asset);
             }
-            foreach(Asset asset in this.Outputs)
+            foreach (Asset asset in this.Outputs)
             {
                 assets.Add(asset);
             }
