@@ -5,16 +5,13 @@ namespace Agency
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            if (args is null)
-            {
-                throw new ArgumentNullException(nameof(args));
-            }
-
             Console.WriteLine("Agency v{0}", Assembly.GetExecutingAssembly().GetName().Version.ToString());
 
             Actor agent = new();
+
+            agent.AvailableAssets.Add(new Money(100));
 
             Retire retire = new();
             retire.Inputs.Add(new Money(1000));
