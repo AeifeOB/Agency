@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace Agency
 {
+    /// <summary>
+    /// The Actor class used to represent an agent in the Agency framework.
+    /// </summary>
     class Actor
     {
         public List<Action> AvailableActions { get; set; }
@@ -11,6 +14,9 @@ namespace Agency
         public List<Action> Goals { get; set; }
         public Plan CurrentPlan { get; set; }
 
+        /// <summary>
+        /// The constructor for the Actor class.
+        /// </summary>
         public Actor()
         {
             AvailableActions = new List<Action>();
@@ -19,6 +25,9 @@ namespace Agency
             CurrentPlan = new Plan();
         }
 
+        /// <summary>
+        /// Method for an Actor to create a plan based on the first goal in their Goals variable.
+        /// </summary>
         public void Think()
         {
             if (this.CurrentPlan.Actions.Count == 0)
@@ -39,7 +48,6 @@ namespace Agency
                 {
                     foreach (Asset asset in requiredAssets)
                     {
-                        Console.WriteLine("Trying to find {0}", asset.GetType());
                         foreach (Action action in this.AvailableActions)
                         {
                             if (action.Outputs.Any(x => (x.GetType() == asset.GetType())))
@@ -53,6 +61,11 @@ namespace Agency
             }
         }
 
+        /// <summary>
+        /// A private method to find all assets required by an action that are not already present in the Actor's available assets.
+        /// </summary>
+        /// <param name="action"></param>
+        /// <returns></returns>
         private List<Asset> FindRequiredAssets(Action action)
         {
             List<Asset> requiredAssets = new();
