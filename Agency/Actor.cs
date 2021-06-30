@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace Agency
@@ -66,7 +65,7 @@ namespace Agency
         /// </summary>
         /// <param name="action"></param>
         /// <returns></returns>
-        private List<Asset> FindRequiredAssets(Action action)
+        public List<Asset> FindRequiredAssets(Action action)
         {
             List<Asset> requiredAssets = new();
             foreach (Asset asset in action.Inputs)
