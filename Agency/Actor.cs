@@ -7,7 +7,7 @@ namespace Agency
     /// <summary>
     /// The Actor class used to represent an agent in the Agency framework.
     /// </summary>
-    class Actor
+    public class Actor
     {
         public List<Action> AvailableActions { get; set; }
         public List<Asset> AvailableAssets { get; set; }

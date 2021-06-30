@@ -1,7 +1,8 @@
-﻿using System;
+﻿using Agency;
+using System;
 using System.Reflection;
 
-namespace Agency
+namespace Example
 {
     class Program
     {
@@ -32,7 +33,7 @@ namespace Agency
 
             // Display the agent's plan
             Console.WriteLine("Agent's Plan:");
-            foreach (Action action in agent.CurrentPlan.Actions)
+            foreach (Agency.Action action in agent.CurrentPlan.Actions)
             {
                 Console.WriteLine(action);
             }

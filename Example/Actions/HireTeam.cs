@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Agency;
+using System.Collections.Generic;
 
-namespace Agency
+namespace Example
 {
     /// <summary>
     /// An example action where an Actor hires a Team. Inherits from the Action abstract class.

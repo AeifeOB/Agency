@@ -5,7 +5,7 @@ namespace Agency
     /// <summary>
     /// A class to hold plans that can be used by an actor. These are made up of a series of Actions that can be executed.
     /// </summary>
-    class Plan
+    public class Plan
     {
         public List<Action> Actions { get; set; }
 

@@ -5,7 +5,7 @@ namespace Agency
     /// <summary>
     /// An abstract class to represent actions that can be done by an Actor in framework.
     /// </summary>
-    abstract class Action
+    public abstract class Action
     {
         public List<Asset> Inputs { get; set; }
         public List<Asset> Outputs { get; set; }

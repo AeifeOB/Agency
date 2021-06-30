@@ -1,18 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Library</OutputType>
+    <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
-    <Version>0.1.0</Version>
     <Authors>Tom Mann</Authors>
-    <PackageProjectUrl>https://github.com/Manny-coffee-dev/Agency</PackageProjectUrl>
+    <Version>0.1.0</Version>
+    <Description>An example usage of the Agency framework</Description>
     <RepositoryUrl>https://github.com/Manny-coffee-dev/Agency</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/Manny-coffee-dev/Agency</PackageProjectUrl>
     <RepositoryType>Git</RepositoryType>
+    <Product>Agency</Product>
     <AssemblyVersion>0.1.0.0</AssemblyVersion>
     <FileVersion>0.1.0.0</FileVersion>
-    <Description>PoC plan-making agent framework</Description>
-    <PackageId>Agency</PackageId>
-    <Product>Agency</Product>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Agency\Agency.csproj" />
+  </ItemGroup>
 
 </Project>

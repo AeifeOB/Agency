@@ -1,4 +1,6 @@
-﻿namespace Agency
+﻿using Agency;
+
+namespace Example
 {
     /// <summary>
     /// A class representing a financial asset in the framework. Inherits in Asset abstract class.

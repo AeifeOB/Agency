@@ -1,12 +1,13 @@
-﻿using System;
+﻿using Agency;
+using System;
 using System.Collections.Generic;
 
-namespace Agency
+namespace Example
 {
     /// <summary>
     /// An example action where an Actor 'retires'. Used as a goal in the example. Inherits from the Action abstract class.
     /// </summary>
-    class Retire : Action
+    class Retire : Agency.Action
     {
         /// <summary>
         /// Constructor for the Retire action.
