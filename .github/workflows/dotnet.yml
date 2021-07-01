@@ -41,6 +41,20 @@ jobs:
       - name: Pack
         run: dotnet pack --configuration Release
 
+     # Archive the dll
+      - name: Archive dll
+        uses: actions/upload-artifact@v2
+        with:
+          name: linux-dll
+          path: /home/runner/work/Agency/Agency/Agency/bin/Release/net5.0/Agency.dll
+
+    # Archive the nupkg
+      - name: Archive nupkg
+        uses: actions/upload-artifact@v2
+        with:
+          name: linux-nupkg
+          path: /home/runner/work/Agency/Agency/Agency/bin/Release/*.nupkg
+
   # Create a Windows deployment
   build_windows:
     name: Build Windows
@@ -77,3 +91,17 @@ jobs:
       # Pack the project
       - name: Pack
         run: dotnet pack --configuration Release
+
+      # Archive the dll
+      - name: Archive dll
+        uses: actions/upload-artifact@v2
+        with:
+          name: windows-dll
+          path: D:\a\Agency\Agency\Agency\bin\Release\net5.0\Agency.dll
+
+    # Archive the nupkg
+      - name: Archive nupkg
+        uses: actions/upload-artifact@v2
+        with:
+          name: windows-nupkg
+          path: D:\a\Agency\Agency\Agency\bin\Release\*.nupkg
