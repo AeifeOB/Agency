@@ -45,14 +45,14 @@ jobs:
       - name: Archive dll
         uses: actions/upload-artifact@v2
         with:
-          name: linux-dll
+          name: linux-${{ matrix.dotnet-version }}-dll
           path: /home/runner/work/Agency/Agency/Agency/bin/Release/net5.0/Agency.dll
 
     # Archive the nupkg
       - name: Archive nupkg
         uses: actions/upload-artifact@v2
         with:
-          name: linux-nupkg
+          name: linux-${{ matrix.dotnet-version }}-nupkg
           path: /home/runner/work/Agency/Agency/Agency/bin/Release/*.nupkg
 
   # Create a Windows deployment
@@ -96,12 +96,12 @@ jobs:
       - name: Archive dll
         uses: actions/upload-artifact@v2
         with:
-          name: windows-dll
+          name: windows-${{ matrix.dotnet-version }}-dll
           path: D:\a\Agency\Agency\Agency\bin\Release\net5.0\Agency.dll
 
     # Archive the nupkg
       - name: Archive nupkg
         uses: actions/upload-artifact@v2
         with:
-          name: windows-nupkg
+          name: windows-${{ matrix.dotnet-version }}-nupkg
           path: D:\a\Agency\Agency\Agency\bin\Release\*.nupkg
