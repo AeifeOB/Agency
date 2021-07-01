@@ -2,7 +2,7 @@ name: Upload dotnet package
 
 on:
   release:
-    types: [created]
+    types: [published]
 
 jobs:
   # Create a Linux deployment
