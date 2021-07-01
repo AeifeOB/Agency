@@ -3,6 +3,7 @@ name: dotnet package
 on: [push, pull_request]
 
 jobs:
+  # Create a Linux deployment
   build_linux:
 
     name: Build Linux
@@ -28,14 +29,19 @@ jobs:
       - name: Install dependencies
         run: dotnet restore
 
-      # Install the .NET Core workload
+      # Restore the project
       - name: Build
         run: dotnet build --configuration Release --no-restore
 
-      # Install the .NET Core workload
+      # Test the project
       - name: Test
         run: dotnet test --no-restore --verbosity normal
 
+      # Pack the project
+      - name: Pack
+        run: dotnet pack --configuration Release
+
+  # Create a Windows deployment
   build_windows:
     name: Build Windows
     runs-on: windows-latest
@@ -60,10 +66,14 @@ jobs:
       - name: Install dependencies
         run: dotnet restore
 
-      # Install the .NET Core workload
+      # Restore the project
       - name: Build
         run: dotnet build --configuration Release --no-restore
 
-      # Install the .NET Core workload
+      # Test the project
       - name: Test
         run: dotnet test --no-restore --verbosity normal
+
+      # Pack the project
+      - name: Pack
+        run: dotnet pack --configuration Release
