@@ -1,0 +1,31 @@
+name: Upload dotnet package
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    strategy:
+       matrix:
+         dotnet-version: ['5.0.x' ]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ matrix.dotnet-version }}
+          source-url: https://nuget.pkg.github.com/Manny-coffee-dev/index.json
+        env:
+          NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      - name: Download all workflow run artifacts
+        uses: actions/download-artifact@v2
+
+      - name: Publish Windows package
+        run: dotnet nuget push windows-${{ matrix.dotnet-version }}-dll --source "github"
+
+      - name: Publish Linux package
+        run: dotnet nuget push linux-${{ matrix.dotnet-version }}-dll --source "github"
