@@ -13,6 +13,7 @@
     <Description>PoC plan-making agent framework</Description>
     <PackageId>Agency</PackageId>
     <Product>Agency</Product>
+    <Company>Coffee Break Devs</Company>
   </PropertyGroup>
 
 </Project>

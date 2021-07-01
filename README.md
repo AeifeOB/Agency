@@ -10,6 +10,9 @@ Actors try to form plans by looking at a goal they have and seeing what inputs a
 The actor will then look through all available actions to find one that provides at least one of those inputs as an output. This action is then appended to the plan, and the search continues.
 Actions previously selected have their inputs added to search until the actor's available assets are able to meet those inputs.
 
+## Examples
+An example of usage of the Agency framework can be found in the Example directory of this codebase.
+
 ## Road Map
 This section details planned releases for the Agency framework. Agency uses [Semantic Versioning 2.0.0](https://semver.org/) for tracking codebase versions. Until the framework stablises, 
 Agency will use 0.X.Y versions. Once the PoC is complete, a stable 1.0.0 release will be created.
