@@ -131,7 +131,7 @@ jobs:
         uses: actions/download-artifact@v2
 
       - name: Publish Windows package
-        run: dotnet nuget push windows-${{ matrix.dotnet-version }}-nupkg --api-key ${{secrets.GITHUB_TOKEN}} --source "github"
+        run: dotnet nuget push windows-${{ matrix.dotnet-version }}-nupkg --api-key ${{secrets.GITHUB_TOKEN}} --source "https://nuget.pkg.github.com/Manny-coffee-dev/index.json"
 
       - name: Publish Linux package
-        run: dotnet nuget push linux-${{ matrix.dotnet-version }}-nupkg --api-key ${{secrets.GITHUB_TOKEN}} --source "github"
+        run: dotnet nuget push linux-${{ matrix.dotnet-version }}-nupkg --api-key ${{secrets.GITHUB_TOKEN}} --source "https://nuget.pkg.github.com/Manny-coffee-dev/index.json"
