@@ -1,5 +1,3 @@
-![badge](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/Manny-coffee-dev/74dc33e69907cf01d90d9fb8cdec832b/raw/code-coverage.json)
-
 # Agency
 This is a PoC framework for autonomous, plan-making agents.
 
