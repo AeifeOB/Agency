@@ -17,10 +17,10 @@ An example of usage of the Agency framework can be found in the Example director
 This section details planned releases for the Agency framework. Agency uses [Semantic Versioning 2.0.0](https://semver.org/) for tracking codebase versions. Until the framework stablises, 
 Agency will use 0.X.Y versions. Once the PoC is complete, a stable 1.0.0 release will be created.
 
-### Initial Pre-Alpha Release - [Rational Agent](https://github.com/Manny-coffee-dev/Agency/milestone/1) - v0.1.0 - In Progress
+### Initial Pre-Alpha Release - [Rational Agent](https://github.com/Manny-coffee-dev/Agency/milestone/1) - v0.1.0 - Completed
 An intial release containing a basic framework to allow the development of agents which can form and execute rational plans based on their internal goals.
 
-### Update 1 - [Behavioural Agent](https://github.com/Manny-coffee-dev/Agency/milestone/3) - v0.2.0 
+### Update 1 - [Behavioural Agent](https://github.com/Manny-coffee-dev/Agency/milestone/3) - v0.2.0 - In Progress
 This update brings traits which allow recording of data about an agent or asset. These traits also allow for the change of an agent/asset's behaviour.
 
 ### Update 2 - [Needy Agent](https://github.com/Manny-coffee-dev/Agency/milestone/2) - v0.3.0 
