@@ -108,8 +108,9 @@ jobs:
           name: windows-${{ matrix.dotnet-version }}-nupkg
           path: D:\a\Agency\Agency\Agency\bin\Release\*.nupkg
 
-  # Deploy all builds
-  deploy:
+  # Publish all builds
+  publish:
+    name: Publish Packages
     runs-on: ubuntu-latest
     permissions:
       packages: write
