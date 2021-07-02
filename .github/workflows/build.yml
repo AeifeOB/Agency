@@ -41,7 +41,7 @@ jobs:
         run: ls /home/runner/work/Agency/Agency/Test/ 
 
       - name: Look for test results
-        run: ls */Test/TestResults/ 
+        run: ls /home/runner/work/Agency/Agency/Test/TestResults
       
       # Create Coverage badge
       - name: Create Test Coverage Badge
