@@ -35,13 +35,14 @@ jobs:
 
       # Test the project
       - name: Test
-        run: dotnet test -p:CollectCoverage=true -p:CoverletOutput=TestResults/ -p:CoverletOutputFormat=opencover --verbosity normal /home/runner/work/Agency/Agency/
+        run: dotnet test -p:CollectCoverage=true -p:CoverletOutput=TestResults/ -p:CoverletOutputFormat=opencover --verbosity normal Agency.Tests/
+      
         
       - name: Look for test results
         run: ls /home/runner/work/Agency/Agency/
 
       - name: Look for test results
-        run: ls /home/runner/work/Agency/Agency/TestResults/
+        run: ls /home/runner/work/Agency/Agency/Test/TestResults/
       
       # Create Coverage badge
       - name: Create Test Coverage Badge
@@ -50,7 +51,7 @@ jobs:
         with:
           label: Unit Test Coverage
           color: brightgreen
-          path: /home/runner/work/Agency/Agency/TestResults/coverage.opencover.xml
+          path: Agency.Tests/TestResults/coverage.opencover.xml
           gist-filename: code-coverage.json
           gist-id: 74dc33e69907cf01d90d9fb8cdec832b
           gist-auth-token: ${{ secrets.GIST_AUTH_TOKEN }}    
