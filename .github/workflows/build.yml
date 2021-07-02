@@ -35,23 +35,7 @@ jobs:
 
       # Test the project
       - name: Test
-        run: dotnet test  -p:CollectCoverage=true -p:CoverletOutput=./TestResults/ -p:CoverletOutputFormat=opencover --verbosity normal /home/runner/work/Agency/Agency/Test/
-      
-        
-      - name: Look for test results
-        run: ls -R /home/runner/work/Agency/
-
-      # Create Coverage badge
-      - name: Create Test Coverage Badge
-        uses: simon-k/dotnet-code-coverage-badge@v1.0.0
-        id: create_coverage_badge
-        with:
-          label: Unit Test Coverage
-          color: brightgreen
-          path: /home/runner/work/Agency/Agency/Test/TestResults/coverage.opencover.xml
-          gist-filename: code-coverage.json
-          gist-id: 74dc33e69907cf01d90d9fb8cdec832b
-          gist-auth-token: ${{ secrets.GIST_AUTH_TOKEN }}    
+        run: dotnet test  -p:CollectCoverage=true -p:CoverletOutput=./TestResults/ -p:CoverletOutputFormat=opencover --verbosity normal /home/runner/work/Agency/Agency/Test/ 
          
 
 
