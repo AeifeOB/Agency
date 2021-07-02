@@ -38,7 +38,7 @@ jobs:
         run: dotnet test -p:CollectCoverage=true -p:CoverletOutput=TestResults/ -p:CoverletOutputFormat=opencover --verbosity normal 
         
       - name: Look for test results
-        run: ls /home/runner/work/Agency/Agency/Agency/TestResults/
+        run: ls /home/runner/work/Agency/Agency/
 
       - name: Look for test results
         run: ls /home/runner/work/Agency/Agency/Test/TestResults/
