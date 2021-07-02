@@ -127,11 +127,21 @@ jobs:
           source-url: https://nuget.pkg.github.com/Manny-coffee-dev/index.json
         env:
           NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
       - name: Download all workflow run artifacts
         uses: actions/download-artifact@v2
 
+      - name: Check parent directory
+        run: ls
+
+      - name: Check Windows artifact
+        run: ls windows-${{ matrix.dotnet-version }}-nupkg
+        
+      - name: Check Linux artifact
+        run: ls linux-${{ matrix.dotnet-version }}-nupkg
+
       - name: Publish Windows package
-        run: dotnet nuget push windows-${{ matrix.dotnet-version }}-nupkg --api-key ${{secrets.GITHUB_TOKEN}} --source "https://nuget.pkg.github.com/Manny-coffee-dev/index.json"
+        run: dotnet nuget push ./windows-${{ matrix.dotnet-version }}-nupkg/*.nupkg --api-key ${{secrets.GITHUB_TOKEN}} --source "https://nuget.pkg.github.com/Manny-coffee-dev/index.json"
 
       - name: Publish Linux package
-        run: dotnet nuget push linux-${{ matrix.dotnet-version }}-nupkg --api-key ${{secrets.GITHUB_TOKEN}} --source "https://nuget.pkg.github.com/Manny-coffee-dev/index.json"
+        run: dotnet nuget push ./linux-${{ matrix.dotnet-version }}-nupkg/*.nupkg --api-key ${{secrets.GITHUB_TOKEN}} --source "https://nuget.pkg.github.com/Manny-coffee-dev/index.json"
