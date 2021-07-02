@@ -8,7 +8,7 @@ jobs:
   # Create a Linux deployment
   build_linux:
 
-    name: Build Linux
+    name: Build_Linux
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -59,7 +59,7 @@ jobs:
 
   # Create a Windows deployment
   build_windows:
-    name: Build Windows
+    name: Build_Windows
     runs-on: windows-latest
     strategy:
        matrix:
@@ -110,8 +110,9 @@ jobs:
 
   # Publish all builds
   publish:
-    name: Publish Packages
+    name: Publish_Packages
     runs-on: ubuntu-latest
+    needs: [Build_Windows, Build_Linux]
     permissions:
       packages: write
       contents: read
