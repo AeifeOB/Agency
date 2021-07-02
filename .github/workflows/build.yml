@@ -39,11 +39,8 @@ jobs:
       
         
       - name: Look for test results
-        run: ls /home/runner/work/Agency/Agency/Test/TestResults/
+        run: ls -R /home/runner/work/Agency/
 
-      - name: Look for test results
-        run: ls TestResults/
-      
       # Create Coverage badge
       - name: Create Test Coverage Badge
         uses: simon-k/dotnet-code-coverage-badge@v1.0.0
