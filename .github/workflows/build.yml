@@ -35,7 +35,7 @@ jobs:
 
       # Test the project
       - name: Test
-        run: dotnet test -p:CollectCoverage=true -p:CoverletOutput=TestResults/ -p:CoverletOutputFormat=opencover --no-build --verbosity normal Agency.Test/Agency.Test.csproj/
+        run: dotnet test -p:CollectCoverage=true -p:CoverletOutput=TestResults/ -p:CoverletOutputFormat=opencover --no-build --verbosity normal Agency.Test\Agency.Test.csproj\
       
       # Create Coverage badge
       - name: Create Test Coverage Badge
@@ -44,7 +44,7 @@ jobs:
         with:
           label: Unit Test Coverage
           color: brightgreen
-          path: Agency.Test/Agency.Test.csproj/TestResults/coverage.opencover.xml
+          path: Agency.Test\Agency.Test.csproj\TestResults\coverage.opencover.xml
           gist-filename: code-coverage.json
           gist-id: 74dc33e69907cf01d90d9fb8cdec832b
           gist-auth-token: ${{ secrets.GIST_AUTH_TOKEN }}    
