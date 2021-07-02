@@ -1,0 +1,165 @@
+name: Upload dotnet package
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  # Test a Linux deployment
+  test_linux:
+
+    name: Test_Linux
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        dotnet-version: ['5.0.x' ]
+
+    env:
+      Solution_Name: Agency.sln                         
+      Test_Project_Path: Agency.Test\Agency.Test.csproj
+
+    steps:
+      - uses: actions/checkout@v2
+
+      # Install the .NET Core workload
+      - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
+        uses: actions/setup-dotnet@v1.7.2
+        with:
+          dotnet-version: ${{ matrix.dotnet-version }}
+
+      # Install any dependencies
+      - name: Install dependencies
+        run: dotnet restore
+
+      # Restore the project
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+
+      # Test the project
+      - name: Test
+        run: dotnet test
+
+
+
+  # Create a Linux deployment
+  build_linux:
+
+    name: Build_Linux
+    runs-on: ubuntu-latest
+    needs: [Test_Linux]
+    strategy:
+      matrix:
+        dotnet-version: ['5.0.x' ]
+
+    env:
+      Solution_Name: Agency.sln                         
+      Test_Project_Path: Agency.Test\Agency.Test.csproj
+
+    steps:
+      - uses: actions/checkout@v2
+
+      # Install the .NET Core workload
+      - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
+        uses: actions/setup-dotnet@v1.7.2
+        with:
+          dotnet-version: ${{ matrix.dotnet-version }}
+
+      # Install any dependencies
+      - name: Install dependencies
+        run: dotnet restore
+
+      # Restore the project
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+
+      # Pack the project
+      - name: Pack
+        run: dotnet pack --configuration Release
+
+     # Archive the dll
+      - name: Archive dll
+        uses: actions/upload-artifact@v2
+        with:
+          name: linux-${{ matrix.dotnet-version }}-dll
+          path: /home/runner/work/Agency/Agency/Agency/bin/Release/net5.0/Agency.dll
+
+    # Archive the nupkg
+      - name: Archive nupkg
+        uses: actions/upload-artifact@v2
+        with:
+          name: linux-${{ matrix.dotnet-version }}-nupkg
+          path: /home/runner/work/Agency/Agency/Agency/bin/Release/*.nupkg
+
+  # Create a Windows deployment
+  build_windows:
+    name: Build_Windows
+    runs-on: windows-latest
+    needs: [Test_Linux]
+    strategy:
+       matrix:
+         dotnet-version: ['5.0.x' ]
+
+    env:
+       Solution_Name: Agency.sln                         
+       Test_Project_Path: Agency.Test\Agency.Test.csproj
+
+    steps:
+      - uses: actions/checkout@v2
+
+      # Install the .NET Core workload
+      - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
+        uses: actions/setup-dotnet@v1.7.2
+        with:
+          dotnet-version: ${{ matrix.dotnet-version }}
+
+      # Install any dependencies
+      - name: Install dependencies
+        run: dotnet restore
+
+      # Restore the project
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+
+      # Pack the project
+      - name: Pack
+        run: dotnet pack --configuration Release
+
+      # Archive the dll
+      - name: Archive dll
+        uses: actions/upload-artifact@v2
+        with:
+          name: windows-${{ matrix.dotnet-version }}-dll
+          path: D:\a\Agency\Agency\Agency\bin\Release\net5.0\Agency.dll
+
+    # Archive the nupkg
+      - name: Archive nupkg
+        uses: actions/upload-artifact@v2
+        with:
+          name: windows-${{ matrix.dotnet-version }}-nupkg
+          path: D:\a\Agency\Agency\Agency\bin\Release\*.nupkg
+
+  # Publish package
+  publish:
+    name: Publish_Packages
+    runs-on: ubuntu-latest
+    needs: [Build_Windows, Build_Linux]
+    permissions:
+      packages: write
+      contents: read
+    strategy:
+       matrix:
+         dotnet-version: ['5.0.x' ]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ matrix.dotnet-version }}
+          source-url: https://nuget.pkg.github.com/Manny-coffee-dev/index.json
+        env:
+          NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+      - name: Download all workflow run artifacts
+        uses: actions/download-artifact@v2
+        
+      - name: Publish Windows package
+        run: dotnet nuget push ./windows-${{ matrix.dotnet-version }}-nupkg/*.nupkg --api-key ${{secrets.GITHUB_TOKEN}} --source "https://nuget.pkg.github.com/Manny-coffee-dev/index.json"
