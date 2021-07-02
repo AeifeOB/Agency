@@ -35,7 +35,7 @@ jobs:
 
       # Test the project
       - name: Test
-        run: dotnet test -p:CollectCoverage=true -p:CoverletOutput=TestResults/ -p:CoverletOutputFormat=opencover --no-build --verbosity normal 
+        run: dotnet test -p:CollectCoverage=true -p:CoverletOutput=TestResults/ -p:CoverletOutputFormat=opencover --verbosity normal 
       
       # Create Coverage badge
       - name: Create Test Coverage Badge
