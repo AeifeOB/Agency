@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Agency": {
+      "commandName": "Project"
+    },
+    "Example": {
+      "commandName": "Executable"
+    }
+  }
+}
