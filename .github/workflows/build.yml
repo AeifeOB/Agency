@@ -36,6 +36,18 @@ jobs:
       # Test the project
       - name: Test
         run: dotnet test -p:CollectCoverage=true -p:CoverletOutput=TestResults/ -p:CoverletOutputFormat=opencover --verbosity normal 
+
+      -name: Look for test results
+       run: ls * 
+       
+      -name: Look for test results
+       run: ls /home/runner/work/Agency/Agency/Test/ 
+
+      -name: Look for test results
+       run: ls /home/runner/work/Agency/Agency/Test/Test.csproj/ 
+
+      -name: Look for test results
+       run: ls /home/runner/work/Agency/Agency/Test/Test.sln/ 
       
       # Create Coverage badge
       - name: Create Test Coverage Badge
