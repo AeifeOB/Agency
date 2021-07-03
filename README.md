@@ -1,3 +1,5 @@
+![Agency Logo](https://repository-images.githubusercontent.com/381489249/37b6c900-da8a-11eb-90cb-6e291ea3974c)
+
 # Agency
 This is a PoC framework for autonomous, plan-making agents.
 
@@ -35,4 +37,3 @@ by raising pull requests with bug fixes and new features.
 
 You can also support us by buying some merchandise from our eco-sustainable partners at [TeeMill](https://coffeebreakdev.teemill.com/).
 We receive a proportion of the cost of each item you purchase. If merchandise isn't your thing, consider [buying us a coffee](buymeacoffee.com/coffeebreakdevs) to support our
-work.
