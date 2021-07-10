@@ -10,6 +10,7 @@ namespace Agency
     {
         public List<Action> AvailableActions { get; set; }
         public List<Asset> AvailableAssets { get; set; }
+        public List<Trait> Traits { get; set; }
         public List<Action> Goals { get; set; }
         public Plan CurrentPlan { get; set; }
 
@@ -20,6 +21,7 @@ namespace Agency
         {
             AvailableActions = new List<Action>();
             AvailableAssets = new List<Asset>();
+            Traits = new List<Trait>();
             Goals = new List<Action>();
             CurrentPlan = new Plan();
         }

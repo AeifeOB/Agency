@@ -1,4 +1,7 @@
 ﻿using Agency;
+using Example.Actions;
+using Example.Assets;
+using Example.Traits;
 using System;
 using System.Reflection;
 
@@ -19,9 +22,10 @@ namespace Example
             Actor agent = new();
 
             agent.AvailableAssets.Add(new Money(100));
+            agent.Traits.Add(new Location("Home", 1.0, 1.0));
 
             // Create a Retire Action and assign it as the agent's goal
-            Retire retire = new();
+            Retire retire = new(new Location("Paradise Island", 2.0, 2.0));
             retire.Inputs.Add(new Money(1000));
             agent.Goals.Add(retire);
 
@@ -37,6 +41,11 @@ namespace Example
             {
                 Console.WriteLine(action);
             }
+            agent.CurrentPlan.Execute(agent);
+            foreach (Agency.Trait trait in agent.Traits)
+            {
+                Console.WriteLine(trait.GetType());
+            }
         }
 
         /// <summary>
@@ -51,6 +60,7 @@ namespace Example
             actor.AvailableActions.Add(robBank);
 
             HireTeam hireTeam = new();
+            hireTeam.Inputs.Add(new Money(100));
             hireTeam.Outputs.Add(new Team(3));
             actor.AvailableActions.Add(hireTeam);
         }

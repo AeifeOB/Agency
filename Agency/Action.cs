@@ -25,15 +25,15 @@ namespace Agency
         /// assets provided, and then adds each asset in the Outputs  variable to the provided list of assets.
         /// </summary>
         /// <param name="assets"></param>
-        public virtual void Execute(List<Asset> assets)
+        public virtual void Execute(Actor actor)
         {
             foreach (Asset asset in this.Inputs)
             {
-                assets.Remove(asset);
+                actor.AvailableAssets.Remove(asset);
             }
             foreach (Asset asset in this.Outputs)
             {
-                assets.Add(asset);
+                actor.AvailableAssets.Add(asset);
             }
         }
 
