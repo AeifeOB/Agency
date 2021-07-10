@@ -51,7 +51,7 @@ namespace Agency
                     {
                         foreach (Action action in this.AvailableActions)
                         {
-                            if (action.Outputs.Any(x => (x.GetType() == asset.GetType())))
+                            if (action.OutputAssets.Any(x => (x.GetType() == asset.GetType())))
                             {
                                 CurrentPlan.Actions.Add(action);
                             }
@@ -70,7 +70,7 @@ namespace Agency
         public List<Asset> FindRequiredAssets(Action action)
         {
             List<Asset> requiredAssets = new();
-            foreach (Asset asset in action.Inputs)
+            foreach (Asset asset in action.InputAssets)
             {
                 if (!this.AvailableAssets.Contains(asset))
                 {

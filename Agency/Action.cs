@@ -7,16 +7,20 @@ namespace Agency
     /// </summary>
     public abstract class Action
     {
-        public List<Asset> Inputs { get; set; }
-        public List<Asset> Outputs { get; set; }
+        public List<Asset> InputAssets { get; set; }
+        public List<Asset> OutputAssets { get; set; }
+        public List<Trait> InputTraits { get; set; }
+        public List<Trait> OutputTraits { get; set; }
 
         /// <summary>
         /// Default constructor for the Action abstract class. Initialises empty Inputs/Outputs lists.
         /// </summary>
         public Action()
         {
-            Inputs = new List<Asset>();
-            Outputs = new List<Asset>();
+            InputAssets = new List<Asset>();
+            OutputAssets = new List<Asset>();
+            InputTraits = new List<Trait>();
+            OutputTraits = new List<Trait>();
         }
 
         /// <summary>
@@ -27,13 +31,17 @@ namespace Agency
         /// <param name="assets"></param>
         public virtual void Execute(Actor actor)
         {
-            foreach (Asset asset in this.Inputs)
+            foreach (Asset asset in this.InputAssets)
             {
                 actor.AvailableAssets.Remove(asset);
             }
-            foreach (Asset asset in this.Outputs)
+            foreach (Asset asset in this.OutputAssets)
             {
                 actor.AvailableAssets.Add(asset);
+            }
+            foreach (Trait trait in this.OutputTraits)
+            {
+                actor.Traits.Add(trait);
             }
         }
 

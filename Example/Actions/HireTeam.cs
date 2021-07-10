@@ -16,8 +16,8 @@ namespace Example.Actions
         /// </summary>
         public HireTeam()
         {
-            Inputs = new List<Asset>();
-            Outputs = new List<Asset>();
+            InputAssets = new List<Asset>();
+            OutputAssets = new List<Asset>();
         }
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace Example.Actions
         /// <param name="assets"></param>
         public override void Execute(Actor actor)
         {
-            foreach (Asset requiredAsset in this.Inputs)
+            foreach (Asset requiredAsset in this.InputAssets)
             {
                 var potentialAsset = actor.AvailableAssets.Where(requiredAsset => true);
                 if (potentialAsset == null)
@@ -37,7 +37,7 @@ namespace Example.Actions
                     actor.AvailableAssets.Remove(potentialAsset.First());
                 }
             }
-            foreach (Asset aquiredAsset in this.Outputs)
+            foreach (Asset aquiredAsset in this.OutputAssets)
             {
                 actor.AvailableAssets.Add(aquiredAsset);
             }

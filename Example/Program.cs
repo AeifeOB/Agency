@@ -22,11 +22,11 @@ namespace Example
             Actor agent = new();
 
             agent.AvailableAssets.Add(new Money(100));
-            agent.Traits.Add(new Location("Home", 1.0, 1.0));
+            agent.Traits.Add(new Location("House"));
 
             // Create a Retire Action and assign it as the agent's goal
-            Retire retire = new(new Location("Paradise Island", 2.0, 2.0));
-            retire.Inputs.Add(new Money(1000));
+            Retire retire = new(new Location("Paradise Island"));
+            retire.InputAssets.Add(new Money(1000));
             agent.Goals.Add(retire);
 
             // Populate the agent's available actions
@@ -55,14 +55,23 @@ namespace Example
         static void AddActionsToActor(Actor actor)
         {
             RobBank robBank = new();
-            robBank.Inputs.Add(new Team(3));
-            robBank.Outputs.Add(new Money(1000));
+            robBank.InputAssets.Add(new Team(3));
+            robBank.OutputAssets.Add(new Money(1000));
             actor.AvailableActions.Add(robBank);
 
             HireTeam hireTeam = new();
-            hireTeam.Inputs.Add(new Money(100));
-            hireTeam.Outputs.Add(new Team(3));
+            hireTeam.InputAssets.Add(new Money(100));
+            hireTeam.OutputAssets.Add(new Team(3));
             actor.AvailableActions.Add(hireTeam);
+
+            GoTo goToBank = new(new Location("Bank"));
+            actor.AvailableActions.Add(goToBank);
+
+            GoTo goToClub = new(new Location("Club"));
+            actor.AvailableActions.Add(goToClub);
+
+            GoTo goToHouse = new(new Location("House"));
+            actor.AvailableActions.Add(goToHouse);
         }
     }
 }

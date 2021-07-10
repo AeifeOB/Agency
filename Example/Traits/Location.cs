@@ -2,17 +2,16 @@
 
 namespace Example.Traits
 {
+    /// <summary>
+    /// Trait to indicate a location
+    /// </summary>
     class Location : Trait
     {
         public string Name { get; set; }
-        public double Latitude { get; set; }
-        public double Longitude { get; set; }
 
-        public Location(string name, double latitude, double longitude)
+        public Location(string name)
         {
             Name = name;
-            Latitude = latitude;
-            Longitude = longitude;
         }
     }
 }
