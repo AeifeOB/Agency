@@ -1,6 +1,6 @@
 ﻿using Agency;
 
-namespace Example
+namespace Example.Assets
 {
     /// <summary>
     /// A class representing a team of Actors asset in the framework. Inherits in Asset abstract class.

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Agency
 {
@@ -21,12 +22,17 @@ namespace Agency
         /// Method to execute each action in Plan, starting from the last plan entered and working back to the first.
         /// </summary>
         /// <param name="assets"></param>
-        public void Execute(List<Asset> assets)
+        public void Execute(Actor actor)
         {
             this.Actions.Reverse();
             foreach (Action action in this.Actions)
             {
-                action.Execute(assets);
+                Console.WriteLine("Executing {0}", action.GetType());
+                foreach(Asset asset in actor.AvailableAssets)
+                {
+                    Console.WriteLine("{0}", asset.GetType());
+                }
+                action.Execute(actor);
             }
         }
     }

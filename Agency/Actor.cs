@@ -10,6 +10,7 @@ namespace Agency
     {
         public List<Action> AvailableActions { get; set; }
         public List<Asset> AvailableAssets { get; set; }
+        public List<Trait> Traits { get; set; }
         public List<Action> Goals { get; set; }
         public Plan CurrentPlan { get; set; }
 
@@ -20,6 +21,7 @@ namespace Agency
         {
             AvailableActions = new List<Action>();
             AvailableAssets = new List<Asset>();
+            Traits = new List<Trait>();
             Goals = new List<Action>();
             CurrentPlan = new Plan();
         }
@@ -39,7 +41,8 @@ namespace Agency
             {
                 count -= 1;
                 List<Asset> requiredAssets = this.FindRequiredAssets(this.CurrentPlan.Actions.Last());
-                if (requiredAssets.Count == 0)
+                List<Trait> requiredTraits = this.FindRequiredTraits(this.CurrentPlan.Actions.Last());
+                if (requiredAssets.Count == 0 && requiredTraits.Count == 0)
                 {
                     ableToCarryOutPlan = true;
                 }
@@ -49,7 +52,17 @@ namespace Agency
                     {
                         foreach (Action action in this.AvailableActions)
                         {
-                            if (action.Outputs.Any(x => (x.GetType() == asset.GetType())))
+                            if (action.OutputAssets.Any(x => (x.GetType() == asset.GetType())))
+                            {
+                                CurrentPlan.Actions.Add(action);
+                            }
+                        }
+                    }
+                    foreach (Trait trait in requiredTraits)
+                    {
+                        foreach (Action action in this.AvailableActions)
+                        {
+                            if (action.OutputTraits.Any(x => (x.GetType() == trait.GetType())))
                             {
                                 CurrentPlan.Actions.Add(action);
                             }
@@ -68,7 +81,7 @@ namespace Agency
         public List<Asset> FindRequiredAssets(Action action)
         {
             List<Asset> requiredAssets = new();
-            foreach (Asset asset in action.Inputs)
+            foreach (Asset asset in action.InputAssets)
             {
                 if (!this.AvailableAssets.Contains(asset))
                 {
@@ -76,6 +89,24 @@ namespace Agency
                 }
             }
             return requiredAssets;
+        }
+
+        /// <summary>
+        /// A private method to find all traits required by an action that are not already present in the Actor's traits.
+        /// </summary>
+        /// <param name="action"></param>
+        /// <returns></returns>
+        public List<Trait> FindRequiredTraits(Action action)
+        {
+            List<Trait> requiredTraits = new();
+            foreach (Trait trait in action.InputTraits)
+            {
+                if (!this.Traits.Contains(trait))
+                {
+                    requiredTraits.Add(trait);
+                }
+            }
+            return requiredTraits;
         }
     }
 }

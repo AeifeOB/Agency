@@ -17,10 +17,10 @@ namespace Test
         public void DefaultConstructor()
         {
             Action action = new TestAction();
-            Assert.AreEqual(new List<Asset>().GetType(), action.Inputs.GetType());
-            Assert.AreEqual(0, action.Inputs.Count);
-            Assert.AreEqual(new List<Asset>().GetType(), action.Outputs.GetType());
-            Assert.AreEqual(0, action.Outputs.Count);
+            Assert.AreEqual(new List<Asset>().GetType(), action.InputAssets.GetType());
+            Assert.AreEqual(0, action.InputAssets.Count);
+            Assert.AreEqual(new List<Asset>().GetType(), action.OutputAssets.GetType());
+            Assert.AreEqual(0, action.OutputAssets.Count);
         }
 
         /// <summary>
@@ -43,11 +43,14 @@ namespace Test
             };
 
             Action action = new TestAction();
-            action.Outputs.Add(assetOne);
+            action.OutputAssets.Add(assetOne);
 
             List<Asset> resultAssetList = new();
 
-            action.Execute(resultAssetList);
+            Actor testActor = new Actor();
+            testActor.AvailableAssets = resultAssetList;
+
+            action.Execute(testActor);
 
             Assert.AreNotEqual(IncorrectAssetList[0], resultAssetList[0]);
             Assert.AreEqual(outputAssetList[0], resultAssetList[0]);
@@ -68,15 +71,17 @@ namespace Test
             };
 
             Action action = new TestAction();
-            action.Inputs.Add(assetOne);
+            action.InputAssets.Add(assetOne);
 
             List<Asset> resultAssetList = new()
             {
                 assetZero,
                 assetOne
             };
+            Actor testActor = new Actor();
+            testActor.AvailableAssets = resultAssetList;
 
-            action.Execute(resultAssetList);
+            action.Execute(testActor);
 
             Assert.AreEqual(outputAssetList[0], resultAssetList[0]);
             try
