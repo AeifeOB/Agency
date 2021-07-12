@@ -143,7 +143,7 @@ An example of usage of the Agency framework can be found in the Example director
 
 ## Road Map
 This section details planned releases for the Agency framework. Agency uses [Semantic Versioning 2.0.0](https://semver.org/) for tracking codebase versions. Until the framework stablises, 
-Agency will use 0.X.Y versions. Once the PoC is complete, a stable 1.0.0 release will be created.
+Agency will use 0.X.Y versions during the alpha phase of development. Once the PoC is complete, a stable 1.0.0 release will be created.
 
 ### Initial Pre-Alpha Release - [Rational Agent](https://github.com/Manny-coffee-dev/Agency/milestone/1) - v0.1.0 - Completed
 An intial release containing a basic framework to allow the development of agents which can form and execute rational plans based on their internal goals.
@@ -169,7 +169,7 @@ This update brings traits which allow recording of data about an agent or asset.
 An expanded modelling of an agent's internal state. This update adds needs that drive internal goal selection in response to changes in an agent's state.
 
 ### Update 3 - [Eventful Agent](https://github.com/Manny-coffee-dev/Agency/milestone/4) - v0.4.0 
-Expansion of the plan execution engine allowing integration into thrid-party systems when an action in executed.
+Expansion of the plan execution engine allowing integration into third-party systems when an action in executed.
 
 <br />
 
