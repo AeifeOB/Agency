@@ -21,11 +21,11 @@ namespace Test
 
             Asset testAsset = new TestAsset(1);
             Action testGoal = new TestGoal();
-            testGoal.Inputs.Add(testAsset);
+            testGoal.InputAssets.Add(testAsset);
             testActor.Goals.Add(testGoal);
 
             Action testAction = new TestAction();
-            testAction.Outputs.Add(testAsset);
+            testAction.OutputAssets.Add(testAsset);
             testActor.AvailableActions.Add(testAction);
 
             testActor.Think();
@@ -47,7 +47,7 @@ namespace Test
             testActor.AvailableAssets.Add(testAsset);
 
             Action testAction = new TestAction();
-            testAction.Inputs.Add(testAsset);
+            testAction.InputAssets.Add(testAsset);
             List<Asset> testResults = testActor.FindRequiredAssets(testAction);
 
             Assert.AreEqual(0, testResults.Count);

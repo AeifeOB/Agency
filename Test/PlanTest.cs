@@ -27,15 +27,19 @@ namespace Test
             };
 
             Action actionZero = new TestAction();
-            actionZero.Outputs.Add(assetZero);
+            actionZero.OutputAssets.Add(assetZero);
             plan.Actions.Add(actionZero);
 
             Action actionOne = new TestAction();
-            actionOne.Outputs.Add(assetOne);
+            actionOne.OutputAssets.Add(assetOne);
             plan.Actions.Add(actionOne);
 
             List<Asset> resultAssetList = new();
-            plan.Execute(resultAssetList);
+
+            Actor testActor = new Actor();
+            testActor.AvailableAssets = resultAssetList;
+
+            plan.Execute(testActor);
 
             Assert.AreEqual(outputAssetList[0], resultAssetList[0]);
             Assert.AreEqual(outputAssetList[1], resultAssetList[1]);

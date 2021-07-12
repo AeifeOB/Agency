@@ -1,6 +1,6 @@
 ﻿using Agency;
 
-namespace Example
+namespace Example.Assets
 {
     /// <summary>
     /// A class representing a financial asset in the framework. Inherits in Asset abstract class.
@@ -16,6 +16,7 @@ namespace Example
         public Money(float amount)
         {
             this.Amount = amount;
+            this.Traits = new System.Collections.Generic.List<Trait>();
         }
     }
 }

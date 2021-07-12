@@ -1,30 +1,48 @@
 ﻿using Agency;
+using Example.Assets;
+using Example.Traits;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
-namespace Example
+namespace Example.Actions
 {
     /// <summary>
     /// An example action where an Actor 'retires'. Used as a goal in the example. Inherits from the Action abstract class.
     /// </summary>
     class Retire : Agency.Action
     {
+        public Location RetirementLocation { get; set; }
         /// <summary>
         /// Constructor for the Retire action.
         /// </summary>
-        public Retire()
+        public Retire(Location retirementLocation)
         {
-            Inputs = new List<Asset>();
-            Outputs = new List<Asset>();
+            InputAssets = new List<Asset>();
+            OutputAssets = new List<Asset>();
+            RetirementLocation = retirementLocation;
         }
 
         /// <summary>
-        /// Overriden implementation of the Execute method required by the Action abstract class. Simply reports that an Actor has 'retired'.
+        /// Overriden implementation of the Execute method required by the Action abstract class. Changes Actor's location to the retirement location and adds the 'Retired' trait.
         /// </summary>
         /// <param name="assets"></param>
-        public override void Execute(List<Asset> assets)
+        public override void Execute(Actor actor)
         {
-            Console.WriteLine("You've retired...");
+            foreach(Asset requiredAsset in this.InputAssets)
+            {
+                var potentialAsset = actor.AvailableAssets.Where(requiredAsset => true);
+                if (potentialAsset == null)
+                {
+                    throw new Exception(String.Format("Unable to retire - missing {0}", requiredAsset.GetType()));
+                }
+            }
+            Console.WriteLine("You've retired to {0}", RetirementLocation.Name);
+            var locations = actor.Traits.SingleOrDefault(r => r is Location);
+            if (locations != null)
+                actor.Traits.Remove(locations);
+            actor.Traits.Add(RetirementLocation);
+            actor.Traits.Add(new Retired());
         }
     }
 }
