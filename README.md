@@ -155,7 +155,7 @@ This update brings traits which allow recording of data about an agent or asset.
 An expanded modelling of an agent's internal state. This update adds needs that drive internal goal selection in response to changes in an agent's state.
 
 ### Update 3 - [Eventful Agent](https://github.com/Manny-coffee-dev/Agency/milestone/4) - v0.4.0 
-Expansion of the plan execution engine allowing integration into thrid-party systems when an action in executed.
+Expansion of the plan execution engine allowing integration into third-party systems when an action in executed.
 
 ## Support This Project
 You can support this project by using it and raising any issues using our [Issues tracker](https://github.com/Manny-coffee-dev/Agency/issues) or contribute directly

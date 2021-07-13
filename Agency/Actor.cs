@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Agency
@@ -12,6 +13,7 @@ namespace Agency
         public List<Asset> AvailableAssets { get; set; }
         public List<Trait> Traits { get; set; }
         public List<Action> Goals { get; set; }
+        public List<Need> Needs { get; set; }
         public Plan CurrentPlan { get; set; }
 
         /// <summary>
@@ -22,6 +24,7 @@ namespace Agency
             AvailableActions = new List<Action>();
             AvailableAssets = new List<Asset>();
             Traits = new List<Trait>();
+            Needs = new List<Need>();
             Goals = new List<Action>();
             CurrentPlan = new Plan();
         }
@@ -31,6 +34,7 @@ namespace Agency
         /// </summary>
         public void Think()
         {
+            this.SelectGoal();
             if (this.CurrentPlan.Actions.Count == 0)
             {
                 this.CurrentPlan.Actions.Add(this.Goals.First());
@@ -71,6 +75,37 @@ namespace Agency
                     this.CurrentPlan.Actions = this.CurrentPlan.Actions.Distinct().ToList();
                 }
             }
+        }
+
+        /// <summary>
+        /// Method for an Actor to select goals based on the traits needed by the Actor and provided by available actions.
+        /// </summary>
+        public void SelectGoal()
+        {
+            Need leastSatisfiedNeed = this.Needs[0];
+            foreach (Need need in Needs)
+            {
+                 if (need.Level > leastSatisfiedNeed.Level)
+                 {
+                     leastSatisfiedNeed = need;
+                 }
+            }
+            List<Action> potentialGoals = new List<Action>();
+            
+            foreach(Action action in this.AvailableActions)
+            {
+                foreach (Trait outputTrait in action.OutputTraits)
+                {
+                    foreach (Trait trait in leastSatisfiedNeed.PositiveTraits)
+                    {
+                        if (trait.GetType() == outputTrait.GetType())
+                        {
+                            potentialGoals.Add(action);
+                        }
+                    }
+                }
+            }
+            this.Goals = potentialGoals;
         }
 
         /// <summary>
