@@ -35,7 +35,7 @@ https://github.com/Manny-coffee-dev/Agency.git
 
 ## Usage
 ### Basic Usage
-To make use of the Agency framework, a number of steps need to be completed:
+To make use of the Agency framework, where an Actor's goals are defined by the user, a number of steps need to be completed:
 
 1) Import the library
 ```
@@ -96,8 +96,10 @@ namespace Main
     {
         public MyAction()
         {
-            Inputs = new List<Asset>();
-            Outputs = new List<Asset>();
+            InputAssets = new List<Asset>();
+            OutputAssets = new List<Asset>();
+            InputTraits = new List<Trait>();
+            OutputTraits = new List<Trait>();
         }
     }
 }
@@ -112,7 +114,11 @@ namespace Main
     class Program
     {
         Actor agent = new();
+
         agent.AvailableAssets.Add(new MyAsset(100));
+        MyAction action = new MyAction();
+        action.OutputAssets.Add(new MyAsset(100));
+        agent.AvailableActions.Add(action);
         agent.Goals.Add(new MyAction());
     }
 
@@ -128,6 +134,189 @@ namespace Main
         Actor agent = new();
         agent.AvailableAssets.Add(new MyAsset(100));
         agent.Goals.Add(new MyAction());
+        agent.Think();
+    }
+
+    ...
+}
+```
+
+### Advanced Usage
+To make use of the Agency framework, where an Actor defines their own goals using needs, a number of steps need to be completed:
+
+1) Import the library
+```
+using Agency;
+
+namespace Main
+{
+    class Program
+    {
+
+    }
+}
+```
+
+2) Create an Actor
+```
+using Agency;
+
+namespace Main
+{
+    class Program
+    {
+        Actor agent = new();
+    }
+}
+
+```
+
+3) Create Assets
+```
+using Agency;
+
+namespace Main
+{
+    ...
+
+    class MyAsset : Asset
+    {
+        public float Value { get; set; }
+
+        public MyAsset(float value)
+        {
+            this.Value = value;
+        }
+    }
+}
+```
+
+4) Create Needs
+```
+using Agency;
+
+namespace Main
+{
+    ...
+
+    class MyNeed : Need
+    {
+
+        public MyNeed(double level) : base(level)
+        {
+            Level = level;
+            PositiveTraits = new List<Trait>();
+            NegativeTraits = new List<Trait>();
+        }
+    }
+}
+```
+
+5) Create Actions
+```
+using Agency;
+
+namespace Main
+{
+    ...
+
+    class MyAction : Action
+    {
+        public MyAction()
+        {
+            Inputs = new List<Asset>();
+            Outputs = new List<Asset>();
+        }
+    }
+}
+```
+
+7) Create Traits
+```
+using Agency;
+
+namespace Main
+{
+    ...
+
+    class MyTrait : Trait
+    {
+        public MyTrait()
+        {
+        }
+    }
+}
+
+8) Assign traits to Action/Need and Action/Need to the Actor
+```
+using Agency;
+
+namespace Main
+{
+    class Program
+    {
+        Actor agent = new();
+
+        MyNeed need = new MyNeed(1.0);
+        need.PositiveTraits.Add(new MyTrait());
+
+        MyAction action = new MyAction();
+        action.OutputAssets.Add(new MyAsset(100));
+        action.OutputTraits.Add(new MyTrait());
+
+        agent.Needs.Add(need);
+        agent.AvailableActions.Add(action);
+    }
+
+    ...
+}
+```
+
+9) Assign Assets to the Actor and let the Actor define their goal
+```
+using Agency;
+
+namespace Main
+{
+    class Program
+    {
+        Actor agent = new();
+
+        MyNeed need = new MyNeed(1.0);
+        need.PositiveTraits.Add(new MyTrait());
+
+        MyAction action = new MyAction();
+        action.OutputAssets.Add(new MyAsset(100));
+        action.OutputTraits.Add(new MyTrait());
+
+        agent.Needs.Add(need);
+        agent.AvailableActions.Add(action);
+
+        agent.SelectGoals();
+    }
+
+    ...
+}
+```
+
+10) Let the Actor create a plan
+```
+{
+    class Program
+    {
+        Actor agent = new();
+
+        MyNeed need = new MyNeed(1.0);
+        need.PositiveTraits.Add(new MyTrait());
+
+        MyAction action = new MyAction();
+        action.OutputAssets.Add(new MyAsset(100));
+        action.OutputTraits.Add(new MyTrait());
+
+        agent.Needs.Add(need);
+        agent.AvailableActions.Add(action);
+
+        agent.SelectGoals();
         agent.Think();
     }
 
@@ -151,11 +340,9 @@ An intial release containing a basic framework to allow the development of agent
 ### Update 1 - [Behavioural Agent](https://github.com/Manny-coffee-dev/Agency/milestone/3) - v0.2.0 - Completed
 This update brings traits which allow recording of data about an agent or asset. These traits also allow for the change of an agent/asset's behaviour.
 
-### Update 2 - [Needy Agent](https://github.com/Manny-coffee-dev/Agency/milestone/2) - v0.3.0 - In Progress
+### Update 2 - [Needy Agent](https://github.com/Manny-coffee-dev/Agency/milestone/2) - v0.3.0 - Completed
 An expanded modelling of an agent's internal state. This update adds needs that drive internal goal selection in response to changes in an agent's state.
 
-### Update 3 - [Eventful Agent](https://github.com/Manny-coffee-dev/Agency/milestone/4) - v0.4.0 
-Expansion of the plan execution engine allowing integration into thrid-party systems when an action in executed.
 
 ## Support This Project
 You can support this project by using it and raising any issues using our [Issues tracker](https://github.com/Manny-coffee-dev/Agency/issues) or contribute directly
