@@ -12,7 +12,7 @@ namespace Test
     {
 
         // <summary>
-        /// Method to test the Think method of the Actor class.
+        /// Method to test the Think method of the Actor class using output assets.
         /// </summary>
         [TestMethod]
         public void Think()
@@ -33,6 +33,27 @@ namespace Test
             Assert.AreEqual(2, testActor.CurrentPlan.Actions.Count);
             Assert.AreEqual(testGoal, testActor.CurrentPlan.Actions[0]);
             Assert.AreEqual(testAction, testActor.CurrentPlan.Actions[1]);
+        }
+
+        // <summary>
+        /// Method to test the SelectGoal method of the Actor class.
+        /// </summary>
+        [TestMethod]
+        public void SelectGoal()
+        {
+            Actor testActor = new();
+            Need testNeed = new TestNeed(1.0);
+            testNeed.PositiveTraits.Add(new TestTrait());
+            testActor.Needs.Add(testNeed);
+
+            Action testAction = new TestAction();
+            testAction.OutputTraits.Add(new TestTrait());
+            testActor.AvailableActions.Add(testAction);
+
+            testActor.SelectGoal();
+
+            Assert.AreEqual(1, testActor.Goals.Count);
+            Assert.AreEqual(testAction, testActor.Goals[0]);
         }
 
         // <summary>
