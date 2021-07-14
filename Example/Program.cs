@@ -30,7 +30,10 @@ namespace Example
             // Populate the agent's available actions
             AddActionsToActor(agent);
 
-            // Allow the agent to select a goal and create a plan
+            // Allow the agent to select goals
+            agent.SelectGoal();
+
+            // Allow the agent to create a plan
             agent.Think();
 
             // Display the agent's goal

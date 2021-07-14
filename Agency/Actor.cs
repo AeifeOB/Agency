@@ -34,7 +34,10 @@ namespace Agency
         /// </summary>
         public void Think()
         {
-            this.SelectGoal();
+            if (this.Goals.Count == 0)
+            {
+                throw new Exception("Actor has no goals");
+            }
             if (this.CurrentPlan.Actions.Count == 0)
             {
                 this.CurrentPlan.Actions.Add(this.Goals.First());
