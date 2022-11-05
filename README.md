@@ -293,7 +293,7 @@ namespace Main
         agent.Needs.Add(need);
         agent.AvailableActions.Add(action);
 
-        agent.SelectGoals();
+        agent.SelectGoal();
     }
 
     ...
@@ -317,7 +317,7 @@ namespace Main
         agent.Needs.Add(need);
         agent.AvailableActions.Add(action);
 
-        agent.SelectGoals();
+        agent.SelectGoal();
         agent.Think();
     }
 
