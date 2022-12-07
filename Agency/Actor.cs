@@ -146,5 +146,37 @@ namespace Agency
             }
             return requiredTraits;
         }
+
+        /// <summary>
+        /// A method to get assets from actions.
+        /// </summary>
+        /// <param name="asset"></param>
+        public void acquire(Asset asset)
+        {
+            if (this.AvailableAssets.Any(x => (x.GetType() == asset.GetType())))
+            {
+                this.AvailableAssets.First(x => (x.GetType() == asset.GetType())).quantity += asset.quantity;
+            }
+            else
+            {
+                this.AvailableAssets.Add(asset);
+            }
+        }
+
+        /// <summary>
+        /// A method to remove assets from the Actor.
+        /// </summary>
+        /// <param name="asset"></param>
+        public void use(Asset asset)
+        {
+            if (this.AvailableAssets.Any(x => (x.GetType() == asset.GetType())))
+            {
+                this.AvailableAssets.First(x => (x.GetType() == asset.GetType())).quantity -= asset.quantity;
+            }
+            else
+            {
+                throw new Exception("Actor does not have the asset");
+            }
+        }
     }
 }

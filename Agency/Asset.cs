@@ -7,6 +7,7 @@ namespace Agency
     /// </summary>
     public abstract class Asset 
     {
-        public List<Trait> Traits { get; set; }
+        //public List<Trait> Traits { get; set; }
+        public float quantity { get; set; }
     }
 }

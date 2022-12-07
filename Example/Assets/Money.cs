@@ -16,7 +16,6 @@ namespace Example.Assets
         public Money(float amount)
         {
             this.Amount = amount;
-            this.Traits = new System.Collections.Generic.List<Trait>();
         }
     }
 }

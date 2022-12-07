@@ -28,22 +28,48 @@ namespace Agency
         /// The default implementation removes each asset required by the action (Inputs) from the list of 
         /// assets provided, and then adds each asset in the Outputs  variable to the provided list of assets.
         /// </summary>
-        /// <param name="assets"></param>
+        /// <param name="actor"></param>
         public virtual void Execute(Actor actor)
         {
-            foreach (Asset asset in this.InputAssets)
-            {
-                actor.AvailableAssets.Remove(asset);
-            }
-            foreach (Asset asset in this.OutputAssets)
-            {
-                actor.AvailableAssets.Add(asset);
-            }
-            foreach (Trait trait in this.OutputTraits)
-            {
-                actor.Traits.Add(trait);
+            if (this.CanExecute(actor)) {
+                foreach (Asset requiredAsset in this.InputAssets)
+                {
+                    actor.use(requiredAsset);
+                }
+                foreach (Asset asset in this.OutputAssets)
+                {
+                    actor.acquire(asset);
+                }
+                foreach (Trait trait in this.OutputTraits)
+                {
+                    actor.Traits.Add(trait);
+                }
             }
         }
 
+        /// <summary>
+        /// Default check to see if an actor can execute an action. This method checks if the actor has the required assets and traits.
+        /// </summary>
+        /// <param name="actor"></param>
+        public virtual bool CanExecute(Actor actor)
+        {
+            // Check if the actor has the required traits
+            foreach (Trait trait in InputTraits)
+            {
+                if (!actor.Traits.Contains(trait))
+                {
+                    return false;
+                }
+            }
+            foreach (Asset requiredAsset in this.InputAssets)
+            {
+                // Check if the actor has the required assets
+                Asset asset = actor.AvailableAssets.Find(asset => asset.GetType() == requiredAsset.GetType());
+                if (asset == null || asset.quantity < requiredAsset.quantity) {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 }
