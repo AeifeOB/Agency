@@ -22,7 +22,7 @@ namespace Agency
         /// Method to execute each action in Plan, starting from the last plan entered and working back to the first.
         /// </summary>
         /// <param name="assets"></param>
-        public void Execute(Actor actor)
+        public virtual void Execute(Actor actor)
         {
             this.Actions.Reverse();
             foreach (Action action in this.Actions)

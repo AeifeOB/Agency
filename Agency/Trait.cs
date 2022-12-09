@@ -5,5 +5,10 @@
     /// </summary>
     public abstract class Trait
     {
+        public Need need { get; set; }
+
+        public Trait() {
+            need = null;
+        }
     }
 }

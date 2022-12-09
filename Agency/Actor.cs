@@ -113,17 +113,19 @@ namespace Agency
 
         /// <summary>
         /// A private method to find all assets required by an action that are not already present in the Actor's available assets.
+        /// If available assets does not contain an asset of the same type as the input asset
+        /// or the quantity of the asset in available assets is less than the quantity of the input asset
+        /// then add the input asset to the list of required assets.
         /// </summary>
         /// <param name="action"></param>
         /// <returns></returns>
         public List<Asset> FindRequiredAssets(Action action)
         {
             List<Asset> requiredAssets = new();
-            foreach (Asset asset in action.InputAssets)
-            {
-                if (!this.AvailableAssets.Contains(asset))
-                {
-                    requiredAssets.Add(asset);
+            foreach (Asset asset in action.InputAssets) {
+                Asset availableAsset = this.AvailableAssets.Find(x => (x.GetType() == asset.GetType()));
+                if (availableAsset is null || availableAsset.quantity < asset.quantity) {
+                        requiredAssets.Add(asset);
                 }
             }
             return requiredAssets;
@@ -139,9 +141,19 @@ namespace Agency
             List<Trait> requiredTraits = new();
             foreach (Trait trait in action.InputTraits)
             {
-                if (!this.Traits.Contains(trait))
-                {
-                    requiredTraits.Add(trait);
+                if ((trait.need is not null)) {
+                    foreach (Need need in this.Needs) {
+                        if (trait.need.GetType() == need.GetType()) {
+                            if (trait.need.Level > need.Level) {
+                                requiredTraits.Add(trait);
+                            }
+                        }
+                    }
+                } else {
+                    if (!this.Traits.Contains(trait))
+                    {
+                        requiredTraits.Add(trait);
+                    }
                 }
             }
             return requiredTraits;

@@ -32,6 +32,7 @@ namespace Agency
         public virtual void Execute(Actor actor)
         {
             if (this.CanExecute(actor)) {
+                // Use required asset and acquire output assets
                 foreach (Asset requiredAsset in this.InputAssets)
                 {
                     actor.use(requiredAsset);
@@ -40,9 +41,12 @@ namespace Agency
                 {
                     actor.acquire(asset);
                 }
-                foreach (Trait trait in this.OutputTraits)
+
+                // Update needs.
+                foreach (Trait effect in this.OutputTraits)
                 {
-                    actor.Traits.Add(trait);
+                    var need = actor.Needs.Find(n => n.GetType() == effect.need.GetType());
+                    need.Level += effect.need.Level;
                 }
             }
         }
@@ -53,12 +57,22 @@ namespace Agency
         /// <param name="actor"></param>
         public virtual bool CanExecute(Actor actor)
         {
-            // Check if the actor has the required traits
+             // Check if the actor has the required traits
             foreach (Trait trait in InputTraits)
             {
-                if (!actor.Traits.Contains(trait))
-                {
-                    return false;
+                if ((trait.need is not null)){
+                    foreach (Need need in actor.Needs) {
+                        if (trait.need.GetType() == need.GetType()) {
+                            if (trait.need.Level > need.Level) {
+                                return false;
+                            }
+                        }
+                    }
+                } else {
+                    if (!actor.Traits.Contains(trait))
+                    {
+                        return false;
+                    }
                 }
             }
             foreach (Asset requiredAsset in this.InputAssets)

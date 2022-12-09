@@ -16,8 +16,8 @@ namespace Agency
         /// <summary>
         /// The constructor for the Needs class. 
         /// Level - level that the needs is satisfied to.
-        /// PositiveTraits - List of traits that will be added to the actor if the need is satisfied.
-        /// NegativeTraits - List of traits that will be removed from the actor if the need is satisfied.
+        /// PositiveTraits - List of traits that the actor will search for in actions.
+        /// NegativeTraits - List of traits that the actor will avoid in actions.
         /// </summary>
         public Need(double level)
         {
